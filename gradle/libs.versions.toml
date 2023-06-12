@@ -1,0 +1,23 @@
+[versions]
+kotlin = "1.8.22"
+coroutines = "1.7.1"
+
+[libraries.kotlin-gradle]
+version.ref = "kotlin"
+module = "org.jetbrains.kotlin:kotlin-gradle-plugin"
+
+[libraries.coroutines-core]
+version.ref = "coroutines"
+module = "org.jetbrains.kotlinx:kotlinx-coroutines-core"
+
+[libraries.kotlin-test-core]
+version.ref = "kotlin"
+module = "org.jetbrains.kotlin:kotlin-test"
+
+[libraries.kotlin-test-junit]
+version.ref = "kotlin"
+module = "org.jetbrains.kotlin:kotlin-test-junit"
+
+[libraries.ink-publishing]
+version = "1.0.1"
+module = "com.inkapplications.publishing:ink-publishing"
