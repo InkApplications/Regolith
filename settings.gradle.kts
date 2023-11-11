@@ -1,3 +1,3 @@
 rootProject.name = "regolith"
 
-include("core")
+include("init:core")

@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.8.22"
-coroutines = "1.7.1"
+coroutines = "1.7.3"
 
 [libraries.kotlin-gradle]
 version.ref = "kotlin"
@@ -9,6 +9,10 @@ module = "org.jetbrains.kotlin:kotlin-gradle-plugin"
 [libraries.coroutines-core]
 version.ref = "coroutines"
 module = "org.jetbrains.kotlinx:kotlinx-coroutines-core"
+
+[libraries.coroutines-test]
+version.ref = "coroutines"
+module = "org.jetbrains.kotlinx:kotlinx-coroutines-test"
 
 [libraries.kotlin-test-core]
 version.ref = "kotlin"
