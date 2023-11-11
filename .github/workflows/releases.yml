@@ -1,0 +1,93 @@
+name: Release
+on:
+  push:
+    tags: ['*']
+env:
+  GITHUB_TAG: ${{ github.ref }}
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2.3.4
+      -
+        name: Configure Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: adopt-openj9
+      -
+        name: Tests
+        run: ./gradlew check
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2.3.4
+      -
+        name: Configure Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: adopt-openj9
+      -
+        name: Maven Publish
+        env:
+          GITHUB_TAG: ${{ github.ref }}
+          ORG_GRADLE_PROJECT_mavenUser: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingKeyId: ${{ secrets.PGP_INK_CI_KEYID }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.PGP_INK_CI_PRIVATE }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.PGP_INK_CI_PASSWORD }}
+        run: >
+          ./gradlew
+          publishKotlinMultiplatformPublicationToMavenCentralRepository
+          publishLinuxX64PublicationToMavenCentralRepository
+          publishLinuxArm64PublicationToMavenCentralRepository
+          publishAndroidNativeArm32PublicationToMavenCentralRepository
+          publishAndroidNativeArm64PublicationToMavenCentralRepository
+          publishAndroidNativeX86PublicationToMavenCentralRepository
+          publishAndroidNativeX64PublicationToMavenCentralRepository
+          publishJsPublicationToMavenCentralRepository
+          publishJvmPublicationToMavenCentralRepository
+          publishMingwX64PublicationToMavenCentralRepository
+          -Pversion=${GITHUB_TAG/refs\/tags\//}
+  macos:
+    runs-on: macos-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2.3.4
+      -
+        name: Configure Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: adopt-openj9
+      -
+        name: Maven Publish
+        env:
+          GITHUB_TAG: ${{ github.ref }}
+          ORG_GRADLE_PROJECT_mavenUser: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingKeyId: ${{ secrets.PGP_INK_CI_KEYID }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.PGP_INK_CI_PRIVATE }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.PGP_INK_CI_PASSWORD }}
+        run: >
+          ./gradlew
+          publishMacosX64PublicationToMavenCentralRepository
+          publishMacosArm64PublicationToMavenCentralRepository
+          publishIosSimulatorArm64PublicationToMavenCentralRepository
+          publishIosX64PublicationToMavenCentralRepository
+          publishWatchosSimulatorArm64PublicationToMavenCentralRepository
+          publishWatchosX64PublicationToMavenCentralRepository
+          publishWatchosArm32PublicationToMavenCentralRepository
+          publishWatchosArm64PublicationToMavenCentralRepository
+          publishTvosSimulatorArm64PublicationToMavenCentralRepository
+          publishTvosX64PublicationToMavenCentralRepository
+          publishTvosArm64PublicationToMavenCentralRepository
+          publishIosArm64PublicationToMavenCentralRepository
+          publishWatchosDeviceArm64PublicationToMavenCentralRepository
+          -Pversion=${GITHUB_TAG/refs\/tags\//}

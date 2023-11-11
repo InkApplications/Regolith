@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("maven-publish")
+    id("signing")
 }
 
 repositories {
@@ -51,12 +52,26 @@ kotlin {
 }
 
 publishing {
+    repositories {
+        val mavenUser = findProperty("mavenUser")?.toString()
+        val mavenPassword = findProperty("mavenPassword")?.toString()
+        if (mavenUser != null && mavenPassword != null) {
+            maven {
+                name = "MavenCentral"
+                setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+                credentials {
+                    username = mavenUser
+                    password = mavenPassword
+                }
+            }
+        }
+    }
     publications {
         withType<MavenPublication> {
             pom {
                 name.set("Regolith: ${project.name}")
-                description.set("Bootstrapping and Configuration Toolkit")
-                url.set("https://inkapplications.com")
+                description.set("General purpose application interfaces")
+                url.set("https://github.com/InkApplications/Regolith")
                 licenses {
                     license {
                         name.set("MIT")
@@ -76,6 +91,17 @@ publishing {
                     url.set("https://github.com/InkApplications/regolith")
                 }
             }
+        }
+    }
+    signing {
+        val signingKey = findProperty("signingKey")?.toString()
+        val signingKeyId = findProperty("signingKeyId")?.toString()
+        val signingPassword = findProperty("signingPassword")?.toString()
+        val shouldSign = signingKeyId != null && signingKey != null && signingPassword != null
+
+        if (shouldSign) {
+            useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+            sign(publications)
         }
     }
 }
