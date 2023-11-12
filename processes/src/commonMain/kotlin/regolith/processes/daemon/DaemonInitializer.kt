@@ -11,13 +11,16 @@ import regolith.init.TargetManager
  */
 class DaemonInitializer(
     private val daemons: List<Daemon>,
-    private val daemonScope: CoroutineScope = CoroutineScope(Dispatchers.Default),
+    private val callbacks: DaemonCallbacks = DaemonCallbacks.PrintCallbacks,
+    private val daemonScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
 ): Initializer {
     override suspend fun initialize(targetManager: TargetManager) {
-        daemons.forEach {
+        daemons.forEach { daemon ->
             daemonScope.launch {
-                it.startDaemon()
+                runCatching { daemon.startDaemon() }
+                    .onFailure { callbacks.onDaemonError(daemon, it) }
             }
+            callbacks.onDaemonStarted(daemon)
         }
         targetManager.postTarget(DaemonTarget)
     }
