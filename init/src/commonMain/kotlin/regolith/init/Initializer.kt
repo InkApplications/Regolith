@@ -8,5 +8,5 @@ package regolith.init
  * a target from the target manager
  */
 interface Initializer {
-    suspend fun run(targetManager: TargetManager)
+    suspend fun initialize(targetManager: TargetManager)
 }

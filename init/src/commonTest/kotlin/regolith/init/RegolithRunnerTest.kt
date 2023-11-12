@@ -26,7 +26,7 @@ class RegolithRunnerTest {
     fun suspendOnTarget() = runTest {
         val suspendingInitializer = object: Initializer {
             var runCount = 0
-            override suspend fun run(targetManager: TargetManager) {
+            override suspend fun initialize(targetManager: TargetManager) {
                 targetManager.awaitTarget(TestTarget::class)
                 runCount++
             }

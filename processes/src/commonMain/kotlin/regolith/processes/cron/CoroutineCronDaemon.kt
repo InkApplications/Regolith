@@ -29,7 +29,7 @@ class CoroutineCronDaemon(
         zone = zone,
     )
 
-    override suspend fun start(): Nothing {
+    override suspend fun startDaemon(): Nothing {
         if (jobs.isEmpty()) {
             suspendCancellableCoroutine<Nothing>{}
         }

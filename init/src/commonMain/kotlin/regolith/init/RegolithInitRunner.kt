@@ -51,7 +51,7 @@ class RegolithInitRunner(
             initializers.map { initializer ->
                 async {
                     runCatching {
-                        initializer.run(InitializerTargetManager(initializer, callbacks, this@RegolithInitRunner))
+                        initializer.initialize(InitializerTargetManager(initializer, callbacks, this@RegolithInitRunner))
                     }.onFailure { error ->
                         callbacks.onInitializerError(initializer, error)
                     }.onSuccess {

@@ -13,10 +13,10 @@ class DaemonInitializer(
     private val daemons: List<Daemon>,
     private val daemonScope: CoroutineScope = CoroutineScope(Dispatchers.Default),
 ): Initializer {
-    override suspend fun run(targetManager: TargetManager) {
+    override suspend fun initialize(targetManager: TargetManager) {
         daemons.forEach {
             daemonScope.launch {
-                it.start()
+                it.startDaemon()
             }
         }
         targetManager.postTarget(DaemonTarget)
