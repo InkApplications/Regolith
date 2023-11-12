@@ -9,7 +9,7 @@ kotlin {
             dependencies {
                 implementation(libs.coroutines.core)
                 implementation(projects.timeMachine)
-                api(projects.initCore)
+                api(projects.init)
                 api(libs.kotlinx.datetime)
             }
         }
