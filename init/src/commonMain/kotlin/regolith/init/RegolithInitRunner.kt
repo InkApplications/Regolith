@@ -7,7 +7,7 @@ import kotlin.reflect.KClass
 /**
  * Implementation of the Init runner an target management.
  *
- * This should be the entry point in your application and run [start]
+ * This should be the entry point in your application and run [initialize]
  * *immediately* on startup to kick off initializers.
  */
 class RegolithInitRunner(
@@ -46,8 +46,8 @@ class RegolithInitRunner(
         }
     }
 
-    override fun start() {
-        initializerScope.launch {
+    override fun initialize(): Job {
+        return initializerScope.launch {
             initializers.map { initializer ->
                 async {
                     runCatching {

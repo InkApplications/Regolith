@@ -16,7 +16,7 @@ class RegolithRunnerTest {
             initializerScope = this,
         )
 
-        runner.start()
+        runner.initialize()
         runCurrent()
 
         assertEquals(1, initializerSpy.runCount, "Initializer should be run once")
@@ -35,7 +35,7 @@ class RegolithRunnerTest {
             initializers = listOf(suspendingInitializer),
             initializerScope = this,
         )
-        runner.start()
+        runner.initialize()
         runCurrent()
 
         assertEquals(0, suspendingInitializer.runCount, "Initializer should be suspended until target is reached")
