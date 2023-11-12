@@ -1,6 +1,15 @@
 plugins {
     id("maven-publish")
     id("signing")
+    id("org.jetbrains.dokka")
+}
+
+val dokkaHtml by tasks.getting(org.jetbrains.dokka.gradle.DokkaTask::class)
+
+val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
+    dependsOn(dokkaHtml)
+    archiveClassifier.set("javadoc")
+    from(dokkaHtml.outputDirectory)
 }
 
 publishing {
@@ -20,6 +29,7 @@ publishing {
     }
     publications {
         withType<MavenPublication> {
+            artifact(javadocJar)
             pom {
                 name.set("Regolith: ${project.name}")
                 description.set("General purpose application interfaces")
