@@ -21,3 +21,7 @@ module = "org.jetbrains.kotlin:kotlin-test"
 [libraries.kotlin-test-junit]
 version.ref = "kotlin"
 module = "org.jetbrains.kotlin:kotlin-test-junit"
+
+[libraries.kotlinx-datetime]
+version = "0.4.1"
+module = "org.jetbrains.kotlinx:kotlinx-datetime"

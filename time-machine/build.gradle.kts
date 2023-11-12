@@ -1,5 +1,5 @@
 plugins {
-    id("multiplatform.tier3")
+    id("multiplatform.tier2")
     id("ink.publishing")
 }
 
@@ -8,6 +8,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.coroutines.core)
+                api(libs.kotlinx.datetime)
             }
         }
 
