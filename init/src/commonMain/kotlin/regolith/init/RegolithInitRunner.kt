@@ -28,9 +28,9 @@ class RegolithInitRunner(
      */
     private val initializerScope: CoroutineScope = CoroutineScope(Dispatchers.Default),
 ): InitRunner, TargetManager {
-    private val targets: MutableStateFlow<List<Target>> = MutableStateFlow(emptyList())
+    private val targets: MutableStateFlow<List<InitTarget>> = MutableStateFlow(emptyList())
 
-    override suspend fun <T : Target> awaitTarget(targetClass: KClass<T>): T {
+    override suspend fun <T : InitTarget> awaitTarget(targetClass: KClass<T>): T {
         return targets
             .map {
                 it.filter { it::class == targetClass }
@@ -41,7 +41,7 @@ class RegolithInitRunner(
             .first()
     }
 
-    override suspend fun postTarget(target: Target) {
+    override suspend fun postTarget(target: InitTarget) {
         logger.log("${target::class.simpleName} reached")
         targets.getAndUpdate {
             it + target

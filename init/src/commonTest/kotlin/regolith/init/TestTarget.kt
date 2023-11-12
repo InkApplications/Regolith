@@ -1,3 +1,3 @@
 package regolith.init
 
-object TestTarget: Target
+object TestTarget: InitTarget

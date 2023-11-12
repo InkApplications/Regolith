@@ -9,10 +9,10 @@ interface TargetManager {
     /**
      * Await a target of a specific type to be completed before continuing.
      */
-    suspend fun <T: Target> awaitTarget(targetClass: KClass<T>): T
+    suspend fun <T: InitTarget> awaitTarget(targetClass: KClass<T>): T
 
     /**
      * Inform the runner that a target has been reached.
      */
-    suspend fun postTarget(target: Target)
+    suspend fun postTarget(target: InitTarget)
 }
