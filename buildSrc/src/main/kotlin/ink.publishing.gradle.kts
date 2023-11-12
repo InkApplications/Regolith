@@ -55,15 +55,15 @@ publishing {
             }
         }
     }
-    signing {
-        val signingKey = findProperty("signingKey")?.toString()
-        val signingKeyId = findProperty("signingKeyId")?.toString()
-        val signingPassword = findProperty("signingPassword")?.toString()
-        val shouldSign = signingKeyId != null && signingKey != null && signingPassword != null
+}
+signing {
+    val signingKey = findProperty("signingKey")?.toString()
+    val signingKeyId = findProperty("signingKeyId")?.toString()
+    val signingPassword = findProperty("signingPassword")?.toString()
+    val shouldSign = signingKeyId != null && signingKey != null && signingPassword != null
 
-        if (shouldSign) {
-            useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
-            sign(publications)
-        }
+    if (shouldSign) {
+        useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+        sign(publishing.publications)
     }
 }
