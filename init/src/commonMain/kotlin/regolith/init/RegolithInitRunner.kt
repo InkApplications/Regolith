@@ -59,6 +59,7 @@ class RegolithInitRunner(
                     }
                 }
             }.awaitAll()
+            callbacks.onComplete()
         }
     }
 }
