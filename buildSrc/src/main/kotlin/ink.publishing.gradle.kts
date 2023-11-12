@@ -56,6 +56,7 @@ publishing {
         }
     }
 }
+
 signing {
     val signingKey = findProperty("signingKey")?.toString()
     val signingKeyId = findProperty("signingKeyId")?.toString()
@@ -66,4 +67,9 @@ signing {
         useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
         sign(publishing.publications)
     }
+}
+
+val signingTasks: TaskCollection<Sign> = tasks.withType<Sign>()
+tasks.withType<PublishToMavenRepository>().configureEach {
+    mustRunAfter(signingTasks)
 }
