@@ -2,8 +2,6 @@ package regolith.init
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import regolith.init.log.EmptyLogger
-import regolith.init.log.InitRunnerLogger
 import kotlin.reflect.KClass
 
 /**
@@ -19,9 +17,10 @@ class RegolithInitRunner(
     private val initializers: List<Initializer>,
 
     /**
-     * Optional logger for monitoring initialization events.
+     * Callbacks that can be used to extend or change the functionality
+     * of the initialization process.
      */
-    private val logger: InitRunnerLogger = EmptyLogger,
+    private val callbacks: InitRunnerCallbacks = InitRunnerCallbacks.PrintCallbacks,
 
     /**
      * Scope to run initialization tasks in.
@@ -42,20 +41,22 @@ class RegolithInitRunner(
     }
 
     override suspend fun postTarget(target: InitTarget) {
-        logger.log("${target::class.simpleName} reached")
         targets.getAndUpdate {
             it + target
         }
     }
 
     override fun start() {
-        logger.log("Starting ${initializers.size} Initializers")
         initializerScope.launch {
             initializers.map { initializer ->
                 async {
-                    runCatching { initializer.run(this@RegolithInitRunner) }
-                        .onFailure { error -> logger.error("${initializer::class.simpleName} failed", error) }
-                        .onSuccess { logger.log("${initializer::class.simpleName} complete") }
+                    runCatching {
+                        initializer.run(InitializerTargetManager(initializer, callbacks, this@RegolithInitRunner))
+                    }.onFailure { error ->
+                        callbacks.onInitializerError(initializer, error)
+                    }.onSuccess {
+                        callbacks.onInitializerComplete(initializer)
+                    }
                 }
             }.awaitAll()
         }
