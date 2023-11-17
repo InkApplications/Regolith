@@ -1,0 +1,50 @@
+public abstract interface class regolith/init/InitRunner {
+	public abstract fun initialize ()Lkotlinx/coroutines/Job;
+}
+
+public abstract interface class regolith/init/InitRunnerCallbacks {
+	public abstract fun onComplete ()V
+	public abstract fun onInitializerAwaitingTarget (Lregolith/init/Initializer;Lkotlin/reflect/KClass;)V
+	public abstract fun onInitializerComplete (Lregolith/init/Initializer;)V
+	public abstract fun onInitializerError (Lregolith/init/Initializer;Ljava/lang/Throwable;)V
+	public abstract fun onTargetReached (Lregolith/init/InitTarget;)V
+}
+
+public final class regolith/init/InitRunnerCallbacks$Empty : regolith/init/InitRunnerCallbacks {
+	public static final field INSTANCE Lregolith/init/InitRunnerCallbacks$Empty;
+	public fun onComplete ()V
+	public fun onInitializerAwaitingTarget (Lregolith/init/Initializer;Lkotlin/reflect/KClass;)V
+	public fun onInitializerComplete (Lregolith/init/Initializer;)V
+	public fun onInitializerError (Lregolith/init/Initializer;Ljava/lang/Throwable;)V
+	public fun onTargetReached (Lregolith/init/InitTarget;)V
+}
+
+public final class regolith/init/InitRunnerCallbacks$PrintCallbacks : regolith/init/InitRunnerCallbacks {
+	public static final field INSTANCE Lregolith/init/InitRunnerCallbacks$PrintCallbacks;
+	public fun onComplete ()V
+	public fun onInitializerAwaitingTarget (Lregolith/init/Initializer;Lkotlin/reflect/KClass;)V
+	public fun onInitializerComplete (Lregolith/init/Initializer;)V
+	public fun onInitializerError (Lregolith/init/Initializer;Ljava/lang/Throwable;)V
+	public fun onTargetReached (Lregolith/init/InitTarget;)V
+}
+
+public abstract interface class regolith/init/InitTarget {
+}
+
+public abstract interface class regolith/init/Initializer {
+	public abstract fun initialize (Lregolith/init/TargetManager;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class regolith/init/RegolithInitRunner : regolith/init/InitRunner, regolith/init/TargetManager {
+	public fun <init> (Ljava/util/List;Lregolith/init/InitRunnerCallbacks;Lkotlinx/coroutines/CoroutineScope;)V
+	public synthetic fun <init> (Ljava/util/List;Lregolith/init/InitRunnerCallbacks;Lkotlinx/coroutines/CoroutineScope;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun awaitTarget (Lkotlin/reflect/KClass;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun initialize ()Lkotlinx/coroutines/Job;
+	public fun postTarget (Lregolith/init/InitTarget;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class regolith/init/TargetManager {
+	public abstract fun awaitTarget (Lkotlin/reflect/KClass;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun postTarget (Lregolith/init/InitTarget;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+

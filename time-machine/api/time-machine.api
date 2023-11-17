@@ -1,0 +1,47 @@
+public final class regolith/timemachine/DayFrequency : regolith/timemachine/TimeMachine {
+	public fun <init> ()V
+	public fun <init> (Lkotlinx/datetime/Clock;Lkotlinx/datetime/TimeZone;)V
+	public synthetic fun <init> (Lkotlinx/datetime/Clock;Lkotlinx/datetime/TimeZone;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getTicks ()Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class regolith/timemachine/HourFrequency : regolith/timemachine/TimeMachine {
+	public fun <init> ()V
+	public fun <init> (Lkotlinx/datetime/Clock;Lkotlinx/datetime/TimeZone;)V
+	public synthetic fun <init> (Lkotlinx/datetime/Clock;Lkotlinx/datetime/TimeZone;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getTicks ()Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class regolith/timemachine/InexactDurationMachine : regolith/timemachine/TimeMachine {
+	public synthetic fun <init> (JLkotlinx/datetime/Clock;Lkotlinx/datetime/TimeZone;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (JLkotlinx/datetime/Clock;Lkotlinx/datetime/TimeZone;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getTicks ()Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class regolith/timemachine/MinuteFrequency : regolith/timemachine/TimeMachine {
+	public fun <init> ()V
+	public fun <init> (Lkotlinx/datetime/Clock;Lkotlinx/datetime/TimeZone;)V
+	public synthetic fun <init> (Lkotlinx/datetime/Clock;Lkotlinx/datetime/TimeZone;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getTicks ()Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class regolith/timemachine/SecondFrequency : regolith/timemachine/TimeMachine {
+	public fun <init> ()V
+	public fun <init> (Lkotlinx/datetime/Clock;Lkotlinx/datetime/TimeZone;)V
+	public synthetic fun <init> (Lkotlinx/datetime/Clock;Lkotlinx/datetime/TimeZone;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getTicks ()Lkotlinx/coroutines/flow/Flow;
+}
+
+public abstract interface class regolith/timemachine/TimeMachine {
+	public abstract fun getTicks ()Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class regolith/timemachine/TimeMachineKt {
+	public static final fun getDayTicks (Lregolith/timemachine/TimeMachine;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun getHourTicks (Lregolith/timemachine/TimeMachine;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun getMinuteTicks (Lregolith/timemachine/TimeMachine;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun getMonthTicks (Lregolith/timemachine/TimeMachine;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun getSecondTicks (Lregolith/timemachine/TimeMachine;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun getYearTicks (Lregolith/timemachine/TimeMachine;)Lkotlinx/coroutines/flow/Flow;
+}
+

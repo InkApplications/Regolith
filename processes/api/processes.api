@@ -1,0 +1,65 @@
+public final class regolith/processes/cron/CoroutineCronDaemon : regolith/processes/daemon/Daemon {
+	public fun <init> (Ljava/util/List;Lkotlinx/datetime/Clock;Lkotlinx/datetime/TimeZone;)V
+	public synthetic fun <init> (Ljava/util/List;Lkotlinx/datetime/Clock;Lkotlinx/datetime/TimeZone;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun startDaemon (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class regolith/processes/cron/CronJob {
+	public abstract fun getSchedule ()Lregolith/processes/cron/Schedule;
+	public abstract fun runCron (Lkotlinx/datetime/LocalDateTime;Lkotlinx/datetime/TimeZone;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class regolith/processes/cron/Schedule {
+	public fun <init> ()V
+	public fun <init> (Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;)V
+	public synthetic fun <init> (Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/util/Set;
+	public final fun component2 ()Ljava/util/Set;
+	public final fun component3 ()Ljava/util/Set;
+	public final fun component4 ()Ljava/util/Set;
+	public final fun copy (Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;)Lregolith/processes/cron/Schedule;
+	public static synthetic fun copy$default (Lregolith/processes/cron/Schedule;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;ILjava/lang/Object;)Lregolith/processes/cron/Schedule;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDays ()Ljava/util/Set;
+	public final fun getHours ()Ljava/util/Set;
+	public final fun getMinutes ()Ljava/util/Set;
+	public final fun getMonths ()Ljava/util/Set;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public final fun withDays (Lkotlin/jvm/functions/Function1;)Lregolith/processes/cron/Schedule;
+	public final fun withHours (Lkotlin/jvm/functions/Function1;)Lregolith/processes/cron/Schedule;
+	public final fun withMinutes (Lkotlin/jvm/functions/Function1;)Lregolith/processes/cron/Schedule;
+	public final fun withMonths (Lkotlin/jvm/functions/Function1;)Lregolith/processes/cron/Schedule;
+}
+
+public abstract interface class regolith/processes/daemon/Daemon {
+	public abstract fun startDaemon (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class regolith/processes/daemon/DaemonCallbacks {
+	public abstract fun onDaemonError (Lregolith/processes/daemon/Daemon;Ljava/lang/Throwable;)V
+	public abstract fun onDaemonStarted (Lregolith/processes/daemon/Daemon;)V
+}
+
+public final class regolith/processes/daemon/DaemonCallbacks$Empty : regolith/processes/daemon/DaemonCallbacks {
+	public static final field INSTANCE Lregolith/processes/daemon/DaemonCallbacks$Empty;
+	public fun onDaemonError (Lregolith/processes/daemon/Daemon;Ljava/lang/Throwable;)V
+	public fun onDaemonStarted (Lregolith/processes/daemon/Daemon;)V
+}
+
+public final class regolith/processes/daemon/DaemonCallbacks$PrintCallbacks : regolith/processes/daemon/DaemonCallbacks {
+	public static final field INSTANCE Lregolith/processes/daemon/DaemonCallbacks$PrintCallbacks;
+	public fun onDaemonError (Lregolith/processes/daemon/Daemon;Ljava/lang/Throwable;)V
+	public fun onDaemonStarted (Lregolith/processes/daemon/Daemon;)V
+}
+
+public final class regolith/processes/daemon/DaemonInitializer : regolith/init/Initializer {
+	public fun <init> (Ljava/util/List;Lregolith/processes/daemon/DaemonCallbacks;Lkotlinx/coroutines/CoroutineScope;)V
+	public synthetic fun <init> (Ljava/util/List;Lregolith/processes/daemon/DaemonCallbacks;Lkotlinx/coroutines/CoroutineScope;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun initialize (Lregolith/init/TargetManager;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class regolith/processes/daemon/DaemonTarget : regolith/init/InitTarget {
+	public static final field INSTANCE Lregolith/processes/daemon/DaemonTarget;
+}
+
