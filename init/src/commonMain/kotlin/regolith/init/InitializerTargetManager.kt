@@ -15,7 +15,7 @@ internal class InitializerTargetManager(
         return delegate.awaitTarget(targetClass)
     }
 
-    override suspend fun postTarget(target: InitTarget) {
+    override fun postTarget(target: InitTarget) {
         delegate.postTarget(target)
         callbacks.onTargetReached(target)
     }
