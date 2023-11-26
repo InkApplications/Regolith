@@ -40,11 +40,11 @@ public final class regolith/init/RegolithInitRunner : regolith/init/InitRunner, 
 	public synthetic fun <init> (Ljava/util/List;Lregolith/init/InitRunnerCallbacks;Lkotlinx/coroutines/CoroutineScope;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun awaitTarget (Lkotlin/reflect/KClass;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun initialize ()Lkotlinx/coroutines/Job;
-	public fun postTarget (Lregolith/init/InitTarget;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun postTarget (Lregolith/init/InitTarget;)V
 }
 
 public abstract interface class regolith/init/TargetManager {
 	public abstract fun awaitTarget (Lkotlin/reflect/KClass;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun postTarget (Lregolith/init/InitTarget;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun postTarget (Lregolith/init/InitTarget;)V
 }
 
