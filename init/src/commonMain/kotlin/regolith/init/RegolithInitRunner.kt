@@ -40,7 +40,7 @@ class RegolithInitRunner(
             .first()
     }
 
-    override suspend fun postTarget(target: InitTarget) {
+    override fun postTarget(target: InitTarget) {
         targets.getAndUpdate {
             it + target
         }

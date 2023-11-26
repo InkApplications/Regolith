@@ -17,5 +17,5 @@ interface TargetManager {
     /**
      * Inform the runner that a target has been reached.
      */
-    suspend fun postTarget(target: InitTarget)
+    fun postTarget(target: InitTarget)
 }
