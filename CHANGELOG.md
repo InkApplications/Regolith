@@ -7,6 +7,7 @@ Change Log
 ### Added
 
  - `resources` module with string resource management interfaces.
+ - Android implementation of `StringResources`
 
 1.0.1
 -----

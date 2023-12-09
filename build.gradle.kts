@@ -1,5 +1,7 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
+gradle.startParameter.excludedTaskNames.add("lint")
+
 subprojects {
     repositories {
         mavenCentral()

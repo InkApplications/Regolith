@@ -1,10 +1,14 @@
 [versions]
-kotlin = "1.9.20"
+kotlin = "1.9.21"
 coroutines = "1.7.3"
 
 [libraries.kotlin-gradle]
 version.ref = "kotlin"
 module = "org.jetbrains.kotlin:kotlin-gradle-plugin"
+
+[libraries.android-gradle]
+version = "8.2.0"
+module = "com.android.tools.build:gradle"
 
 [libraries.coroutines-core]
 version.ref = "coroutines"
