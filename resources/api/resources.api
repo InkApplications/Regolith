@@ -1,0 +1,62 @@
+public abstract interface class regolith/resources/ResourceIdentifier {
+}
+
+public final class regolith/resources/ResourceIdentifier$IdInt : regolith/resources/ResourceIdentifier {
+	public static final synthetic fun box-impl (I)Lregolith/resources/ResourceIdentifier$IdInt;
+	public static fun constructor-impl (I)I
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (ILjava/lang/Object;)Z
+	public static final fun equals-impl0 (II)Z
+	public final fun getKey ()I
+	public fun hashCode ()I
+	public static fun hashCode-impl (I)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (I)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()I
+}
+
+public final class regolith/resources/ResourceIdentifier$IdString : regolith/resources/ResourceIdentifier {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lregolith/resources/ResourceIdentifier$IdString;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getKey ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public abstract interface class regolith/resources/StringResources {
+	public abstract fun getString (Lregolith/resources/ResourceIdentifier;)Ljava/lang/String;
+	public abstract fun getString (Lregolith/resources/ResourceIdentifier;[Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public final class regolith/resources/StringResourcesKt {
+	public static final fun getString (Lregolith/resources/StringResources;I)Ljava/lang/String;
+	public static final fun getString (Lregolith/resources/StringResources;I[Ljava/lang/Object;)Ljava/lang/String;
+	public static final fun getString (Lregolith/resources/StringResources;Ljava/lang/String;)Ljava/lang/String;
+	public static final fun getString (Lregolith/resources/StringResources;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public final class regolith/resources/doubles/DummyResources : regolith/resources/StringResources {
+	public static final field INSTANCE Lregolith/resources/doubles/DummyResources;
+	public fun getString (Lregolith/resources/ResourceIdentifier;)Ljava/lang/String;
+	public fun getString (Lregolith/resources/ResourceIdentifier;[Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public final class regolith/resources/doubles/ParrotResources : regolith/resources/StringResources {
+	public static final field INSTANCE Lregolith/resources/doubles/ParrotResources;
+	public fun getString (Lregolith/resources/ResourceIdentifier;)Ljava/lang/String;
+	public fun getString (Lregolith/resources/ResourceIdentifier;[Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public final class regolith/resources/doubles/StubResources : regolith/resources/StringResources {
+	public static final field INSTANCE Lregolith/resources/doubles/StubResources;
+	public fun getString (Lregolith/resources/ResourceIdentifier;)Ljava/lang/String;
+	public synthetic fun getString (Lregolith/resources/ResourceIdentifier;[Ljava/lang/Object;)Ljava/lang/String;
+	public fun getString (Lregolith/resources/ResourceIdentifier;[Ljava/lang/Object;)Ljava/lang/Void;
+}
+

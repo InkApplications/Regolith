@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+1.1.0
+-----
+
+### Added
+
+ - `resources` module with string resource management interfaces.
+
 1.0.1
 -----
 
