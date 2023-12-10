@@ -1,5 +1,9 @@
 package regolith.resources.doubles
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
+import regolith.resources.FileIdentifier
+import regolith.resources.FileResources
 import regolith.resources.ResourceIdentifier
 import regolith.resources.StringResources
 
@@ -22,7 +26,9 @@ import regolith.resources.StringResources
  * This class is useful for testing and verifying that ID/parameters are
  * as expected.
  */
-object ParrotResources: StringResources {
+object ParrotResources: StringResources, FileResources {
     override fun getString(id: ResourceIdentifier): String = "$id"
     override fun getString(id: ResourceIdentifier, vararg params: Any) = "$id[${params.joinToString(",")}]"
+    override suspend fun getFileContents(id: FileIdentifier): String = "$id"
+    override fun getFileLines(id: FileIdentifier): Flow<String> = flowOf("$id")
 }
