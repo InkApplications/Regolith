@@ -105,20 +105,26 @@ public final class regolith/resources/android/AndroidStringResources : regolith/
 	public fun getString (Lregolith/resources/ResourceIdentifier;[Ljava/lang/Object;)Ljava/lang/String;
 }
 
-public final class regolith/resources/doubles/DummyResources : regolith/resources/StringResources {
+public final class regolith/resources/doubles/DummyResources : regolith/resources/FileResources, regolith/resources/StringResources {
 	public static final field INSTANCE Lregolith/resources/doubles/DummyResources;
+	public fun getFileContents (Lregolith/resources/FileIdentifier;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getFileLines (Lregolith/resources/FileIdentifier;)Lkotlinx/coroutines/flow/Flow;
 	public fun getString (Lregolith/resources/ResourceIdentifier;)Ljava/lang/String;
 	public fun getString (Lregolith/resources/ResourceIdentifier;[Ljava/lang/Object;)Ljava/lang/String;
 }
 
-public final class regolith/resources/doubles/ParrotResources : regolith/resources/StringResources {
+public final class regolith/resources/doubles/ParrotResources : regolith/resources/FileResources, regolith/resources/StringResources {
 	public static final field INSTANCE Lregolith/resources/doubles/ParrotResources;
+	public fun getFileContents (Lregolith/resources/FileIdentifier;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getFileLines (Lregolith/resources/FileIdentifier;)Lkotlinx/coroutines/flow/Flow;
 	public fun getString (Lregolith/resources/ResourceIdentifier;)Ljava/lang/String;
 	public fun getString (Lregolith/resources/ResourceIdentifier;[Ljava/lang/Object;)Ljava/lang/String;
 }
 
-public final class regolith/resources/doubles/StubResources : regolith/resources/StringResources {
+public final class regolith/resources/doubles/StubResources : regolith/resources/FileResources, regolith/resources/StringResources {
 	public static final field INSTANCE Lregolith/resources/doubles/StubResources;
+	public fun getFileContents (Lregolith/resources/FileIdentifier;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getFileLines (Lregolith/resources/FileIdentifier;)Lkotlinx/coroutines/flow/Flow;
 	public fun getString (Lregolith/resources/ResourceIdentifier;)Ljava/lang/String;
 	public synthetic fun getString (Lregolith/resources/ResourceIdentifier;[Ljava/lang/Object;)Ljava/lang/String;
 	public fun getString (Lregolith/resources/ResourceIdentifier;[Ljava/lang/Object;)Ljava/lang/Void;
