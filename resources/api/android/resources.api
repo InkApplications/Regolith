@@ -1,3 +1,55 @@
+public abstract interface class regolith/resources/FileIdentifier {
+}
+
+public final class regolith/resources/FileIdentifier$AppFile : regolith/resources/FileIdentifier {
+	public static final synthetic fun box-impl (Lregolith/resources/ResourceIdentifier;)Lregolith/resources/FileIdentifier$AppFile;
+	public static fun constructor-impl (I)Lregolith/resources/ResourceIdentifier;
+	public static fun constructor-impl (Ljava/lang/String;)Lregolith/resources/ResourceIdentifier;
+	public static fun constructor-impl (Lregolith/resources/ResourceIdentifier;)Lregolith/resources/ResourceIdentifier;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Lregolith/resources/ResourceIdentifier;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Lregolith/resources/ResourceIdentifier;Lregolith/resources/ResourceIdentifier;)Z
+	public final fun getId ()Lregolith/resources/ResourceIdentifier;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Lregolith/resources/ResourceIdentifier;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Lregolith/resources/ResourceIdentifier;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Lregolith/resources/ResourceIdentifier;
+}
+
+public final class regolith/resources/FileIdentifier$Path : regolith/resources/FileIdentifier {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lregolith/resources/FileIdentifier$Path;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getLocation ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class regolith/resources/FileIdentifier$Uri : regolith/resources/FileIdentifier {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lregolith/resources/FileIdentifier$Uri;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getLocation ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public abstract interface class regolith/resources/FileResources {
+	public abstract fun getFileContents (Lregolith/resources/FileIdentifier;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getFileLines (Lregolith/resources/FileIdentifier;)Lkotlinx/coroutines/flow/Flow;
+}
+
 public abstract interface class regolith/resources/ResourceIdentifier {
 }
 
@@ -39,6 +91,12 @@ public final class regolith/resources/StringResourcesKt {
 	public static final fun getString (Lregolith/resources/StringResources;I[Ljava/lang/Object;)Ljava/lang/String;
 	public static final fun getString (Lregolith/resources/StringResources;Ljava/lang/String;)Ljava/lang/String;
 	public static final fun getString (Lregolith/resources/StringResources;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public final class regolith/resources/android/AndroidFileResources : regolith/resources/FileResources {
+	public fun <init> (Landroid/content/res/Resources;)V
+	public fun getFileContents (Lregolith/resources/FileIdentifier;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getFileLines (Lregolith/resources/FileIdentifier;)Lkotlinx/coroutines/flow/Flow;
 }
 
 public final class regolith/resources/android/AndroidStringResources : regolith/resources/StringResources {
