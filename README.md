@@ -196,3 +196,41 @@ fun main() {
     ).initialize()
 }
 ```
+
+Resources
+---------
+
+The resources module provides abstractions around application resources like
+files and strings.
+
+### Maven coordinates
+
+    com.inkapplications.regolith:resources
+
+### String Resources
+
+The `StringResources` interface provides a way to load localized strings
+in an application.
+
+Strings can be Identified either by string or integer, and supports parameter
+formatting.
+
+Android has a default implementation to its internal string localization
+loader via the `AndroidStringResources` class.
+
+### File Resources
+
+The `FileResources` interface provides a way to load files from the
+filesystem or the local application resources.
+
+Application packaged resources can be loaded with by name or ID with the
+`FileResources.Local` id type. External files can be loaded by path or URI.
+
+Android has a default implementation via the `AndroidFileResources` class.
+
+JVM has a default implementation via the `JvmFileResources` class.
+
+### Testing
+
+Testing implementations are provided in the `doubles` package, including:
+`DummyResources`, `StubResources`, and `ParrotResources`.

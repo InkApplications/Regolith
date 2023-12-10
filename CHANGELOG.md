@@ -6,8 +6,10 @@ Change Log
 
 ### Added
 
- - `resources` module with string resource management interfaces.
- - Android implementation of `StringResources`
+ - `resources` module with string resource management interfaces and file
+    reading interfaces.
+ - Android implementation of `StringResources` and `FileResources` interfaces
+ - JVM implementation of `FileResources` interface
 
 1.0.1
 -----
