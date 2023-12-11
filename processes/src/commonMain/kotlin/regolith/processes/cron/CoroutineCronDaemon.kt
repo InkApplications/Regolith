@@ -8,6 +8,7 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import regolith.processes.daemon.Daemon
+import regolith.processes.daemon.FailureSignal
 import regolith.timemachine.InexactDurationMachine
 import regolith.timemachine.minuteTicks
 import kotlin.time.Duration.Companion.seconds
@@ -22,6 +23,7 @@ class CoroutineCronDaemon(
     private val jobs: List<CronJob>,
     clock: Clock = Clock.System,
     private val zone: TimeZone = TimeZone.currentSystemDefault(),
+    private val callbacks: CronJobCallbacks = CronJobCallbacks.Empty,
 ): Daemon {
     private val timeMachine = InexactDurationMachine(
         duration = 20.seconds,
@@ -42,11 +44,16 @@ class CoroutineCronDaemon(
                         .filter { it.dayOfMonth in cron.schedule.days }
                         .filter { it.monthNumber in cron.schedule.months }
                         .collect { time ->
-                            cron.runCron(time, zone)
+                            runCatching { cron.runCron(time, zone) }
+                                .onFailure { callbacks.onCronJobError(cron, it) }
                         }
                 }
             }.awaitAll()
             throw IllegalStateException("Time machine completed producing ticks")
         }
+    }
+
+    override suspend fun onFailure(failure: Throwable, attempt: Int): FailureSignal {
+        return FailureSignal.Panic
     }
 }

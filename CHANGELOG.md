@@ -4,8 +4,20 @@ Change Log
 1.1.0
 -----
 
+### Changed
+ - All `DaemonCallbacks` methods are now optional.
+ - `CoroutineCronDaemon` now handles failed crons without throwing exceptions.
+
 ### Added
 
+ - `CoroutineCronDaemon` now provides an optional `CronJobCallbacks` interface
+   for handling failure logging.
+ - `Daemon` interface now includes an `onFailure` method to define
+   failure handling and allow for retries.
+ - `DaemonCallbacks` now includes an `onDaemonRestart` method invoked if
+   the daemon is restarted.
+ - `DaemonCallbacks` now includes a `onPanic` method invoked if a daemon
+   fails and is set to shut down the runner (panic) on failure.
  - `resources` module with string resource management interfaces and file
     reading interfaces.
  - Android implementation of `StringResources` and `FileResources` interfaces
