@@ -114,6 +114,11 @@ public final class regolith/processes/daemon/DaemonRunAttempt {
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class regolith/processes/daemon/DaemonRunAttemptKt {
+	public static final fun getAverageRuntime (Ljava/util/List;)J
+	public static final fun getFailuresPerMinute (Ljava/util/List;)F
+}
+
 public final class regolith/processes/daemon/DaemonTarget : regolith/init/InitTarget {
 	public static final field INSTANCE Lregolith/processes/daemon/DaemonTarget;
 }
