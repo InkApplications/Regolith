@@ -23,11 +23,10 @@ interface Daemon {
      * attempts, such as clearing data, or delaying before attempting to
      * restart.
      *
-     * @param failure The exception thrown by the daemon.
-     * @param attempt The number of times the daemon has been restarted already.
+     * @param attempts Information about previous run failures.
      * @return A [FailureSignal] indicating an action to take after the failure.
      */
-    suspend fun onFailure(failure: Throwable, attempt: Int): FailureSignal {
+    suspend fun onFailure(attempts: List<DaemonRunAttempt>): FailureSignal {
         return FailureSignal.Die
     }
 }

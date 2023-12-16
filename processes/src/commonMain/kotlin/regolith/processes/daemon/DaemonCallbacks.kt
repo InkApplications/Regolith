@@ -17,7 +17,7 @@ interface DaemonCallbacks {
     /**
      * Invoked before a daemon is restarted after an error.
      */
-    fun onDaemonRestart(daemon: Daemon, attempt: Int) {}
+    fun onDaemonRestart(daemon: Daemon, previousAttempts: List<DaemonRunAttempt>) {}
 
     /**
      * Invoked when a deamon throws an error and is set to [FailureSignal.Panic].
@@ -44,8 +44,8 @@ interface DaemonCallbacks {
             error.printStackTrace()
         }
 
-        override fun onDaemonRestart(daemon: Daemon, attempt: Int) {
-            println("${daemon::class.simpleName} Restarting. Attempt $attempt")
+        override fun onDaemonRestart(daemon: Daemon, previousAttempts: List<DaemonRunAttempt>) {
+            println("${daemon::class.simpleName} Restarting. Attempt ${previousAttempts.size + 1}")
         }
 
         override fun onPanic(daemon: Daemon, error: Throwable) {

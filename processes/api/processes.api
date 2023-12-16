@@ -1,7 +1,7 @@
 public final class regolith/processes/cron/CoroutineCronDaemon : regolith/processes/daemon/Daemon {
 	public fun <init> (Ljava/util/List;Lkotlinx/datetime/Clock;Lkotlinx/datetime/TimeZone;Lregolith/processes/cron/CronJobCallbacks;)V
 	public synthetic fun <init> (Ljava/util/List;Lkotlinx/datetime/Clock;Lkotlinx/datetime/TimeZone;Lregolith/processes/cron/CronJobCallbacks;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public fun onFailure (Ljava/lang/Throwable;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun onFailure (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun startDaemon (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
@@ -52,24 +52,24 @@ public final class regolith/processes/cron/Schedule {
 }
 
 public abstract interface class regolith/processes/daemon/Daemon {
-	public abstract fun onFailure (Ljava/lang/Throwable;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun onFailure (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun startDaemon (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class regolith/processes/daemon/Daemon$DefaultImpls {
-	public static fun onFailure (Lregolith/processes/daemon/Daemon;Ljava/lang/Throwable;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun onFailure (Lregolith/processes/daemon/Daemon;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public abstract interface class regolith/processes/daemon/DaemonCallbacks {
 	public abstract fun onDaemonError (Lregolith/processes/daemon/Daemon;Ljava/lang/Throwable;)V
-	public abstract fun onDaemonRestart (Lregolith/processes/daemon/Daemon;I)V
+	public abstract fun onDaemonRestart (Lregolith/processes/daemon/Daemon;Ljava/util/List;)V
 	public abstract fun onDaemonStarted (Lregolith/processes/daemon/Daemon;)V
 	public abstract fun onPanic (Lregolith/processes/daemon/Daemon;Ljava/lang/Throwable;)V
 }
 
 public final class regolith/processes/daemon/DaemonCallbacks$DefaultImpls {
 	public static fun onDaemonError (Lregolith/processes/daemon/DaemonCallbacks;Lregolith/processes/daemon/Daemon;Ljava/lang/Throwable;)V
-	public static fun onDaemonRestart (Lregolith/processes/daemon/DaemonCallbacks;Lregolith/processes/daemon/Daemon;I)V
+	public static fun onDaemonRestart (Lregolith/processes/daemon/DaemonCallbacks;Lregolith/processes/daemon/Daemon;Ljava/util/List;)V
 	public static fun onDaemonStarted (Lregolith/processes/daemon/DaemonCallbacks;Lregolith/processes/daemon/Daemon;)V
 	public static fun onPanic (Lregolith/processes/daemon/DaemonCallbacks;Lregolith/processes/daemon/Daemon;Ljava/lang/Throwable;)V
 }
@@ -77,7 +77,7 @@ public final class regolith/processes/daemon/DaemonCallbacks$DefaultImpls {
 public final class regolith/processes/daemon/DaemonCallbacks$Empty : regolith/processes/daemon/DaemonCallbacks {
 	public static final field INSTANCE Lregolith/processes/daemon/DaemonCallbacks$Empty;
 	public fun onDaemonError (Lregolith/processes/daemon/Daemon;Ljava/lang/Throwable;)V
-	public fun onDaemonRestart (Lregolith/processes/daemon/Daemon;I)V
+	public fun onDaemonRestart (Lregolith/processes/daemon/Daemon;Ljava/util/List;)V
 	public fun onDaemonStarted (Lregolith/processes/daemon/Daemon;)V
 	public fun onPanic (Lregolith/processes/daemon/Daemon;Ljava/lang/Throwable;)V
 }
@@ -85,15 +85,33 @@ public final class regolith/processes/daemon/DaemonCallbacks$Empty : regolith/pr
 public final class regolith/processes/daemon/DaemonCallbacks$PrintCallbacks : regolith/processes/daemon/DaemonCallbacks {
 	public static final field INSTANCE Lregolith/processes/daemon/DaemonCallbacks$PrintCallbacks;
 	public fun onDaemonError (Lregolith/processes/daemon/Daemon;Ljava/lang/Throwable;)V
-	public fun onDaemonRestart (Lregolith/processes/daemon/Daemon;I)V
+	public fun onDaemonRestart (Lregolith/processes/daemon/Daemon;Ljava/util/List;)V
 	public fun onDaemonStarted (Lregolith/processes/daemon/Daemon;)V
 	public fun onPanic (Lregolith/processes/daemon/Daemon;Ljava/lang/Throwable;)V
 }
 
 public final class regolith/processes/daemon/DaemonInitializer : regolith/init/Initializer {
-	public fun <init> (Ljava/util/List;Lregolith/processes/daemon/DaemonCallbacks;Lkotlinx/coroutines/CoroutineScope;)V
-	public synthetic fun <init> (Ljava/util/List;Lregolith/processes/daemon/DaemonCallbacks;Lkotlinx/coroutines/CoroutineScope;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/util/List;Lregolith/processes/daemon/DaemonCallbacks;Lkotlinx/coroutines/CoroutineScope;ILkotlinx/datetime/Clock;)V
+	public synthetic fun <init> (Ljava/util/List;Lregolith/processes/daemon/DaemonCallbacks;Lkotlinx/coroutines/CoroutineScope;ILkotlinx/datetime/Clock;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun initialize (Lregolith/init/TargetManager;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class regolith/processes/daemon/DaemonRunAttempt {
+	public fun <init> (ILkotlinx/datetime/Instant;Lkotlinx/datetime/Instant;Ljava/lang/Throwable;)V
+	public final fun component1 ()I
+	public final fun component2 ()Lkotlinx/datetime/Instant;
+	public final fun component3 ()Lkotlinx/datetime/Instant;
+	public final fun component4 ()Ljava/lang/Throwable;
+	public final fun copy (ILkotlinx/datetime/Instant;Lkotlinx/datetime/Instant;Ljava/lang/Throwable;)Lregolith/processes/daemon/DaemonRunAttempt;
+	public static synthetic fun copy$default (Lregolith/processes/daemon/DaemonRunAttempt;ILkotlinx/datetime/Instant;Lkotlinx/datetime/Instant;Ljava/lang/Throwable;ILjava/lang/Object;)Lregolith/processes/daemon/DaemonRunAttempt;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttempt ()I
+	public final fun getEnded ()Lkotlinx/datetime/Instant;
+	public final fun getError ()Ljava/lang/Throwable;
+	public final fun getRuntime-UwyO8pc ()J
+	public final fun getStarted ()Lkotlinx/datetime/Instant;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class regolith/processes/daemon/DaemonTarget : regolith/init/InitTarget {
@@ -122,5 +140,9 @@ public final class regolith/processes/daemon/FailureSignal$Restart : regolith/pr
 	public fun equals (Ljava/lang/Object;)Z
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class regolith/processes/daemon/MaxRunAttemptsReached : java/lang/IllegalStateException {
+	public fun <init> ()V
 }
 

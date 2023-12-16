@@ -1,13 +1,11 @@
 package regolith.processes.cron
 
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import regolith.processes.daemon.Daemon
+import regolith.processes.daemon.DaemonRunAttempt
 import regolith.processes.daemon.FailureSignal
 import regolith.timemachine.InexactDurationMachine
 import regolith.timemachine.minuteTicks
@@ -45,6 +43,7 @@ class CoroutineCronDaemon(
                         .filter { it.monthNumber in cron.schedule.months }
                         .collect { time ->
                             runCatching { cron.runCron(time, zone) }
+                                .onFailure { if (it is CancellationException) throw it }
                                 .onFailure { callbacks.onCronJobError(cron, it) }
                         }
                 }
@@ -53,7 +52,7 @@ class CoroutineCronDaemon(
         }
     }
 
-    override suspend fun onFailure(failure: Throwable, attempt: Int): FailureSignal {
+    override suspend fun onFailure(attempts: List<DaemonRunAttempt>): FailureSignal {
         return FailureSignal.Panic
     }
 }
