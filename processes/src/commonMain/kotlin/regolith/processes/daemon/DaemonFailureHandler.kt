@@ -1,18 +1,9 @@
 package regolith.processes.daemon
 
 /**
- * A service that runs forever.
+ * Handle failures and determine the next action when a Daemon fails to run.
  */
-interface Daemon: DaemonFailureHandler {
-    /**
-     * Start the daemon.
-     *
-     * Note: This method cannot return, as deamons should continue to run
-     * until they are stopped externally (ie. when the current coroutine
-     * context is cancelled).
-     */
-    suspend fun startDaemon(): Nothing
-
+interface DaemonFailureHandler {
     /**
      * Determine what to do if the daemon stops unexpectedly.
      *
@@ -26,7 +17,5 @@ interface Daemon: DaemonFailureHandler {
      * @param attempts Information about previous run failures.
      * @return A [FailureSignal] indicating an action to take after the failure.
      */
-    override suspend fun onFailure(attempts: List<DaemonRunAttempt>): FailureSignal {
-        return FailureSignal.Die
-    }
+    suspend fun onFailure(attempts: List<DaemonRunAttempt>): FailureSignal
 }

@@ -51,7 +51,7 @@ public final class regolith/processes/cron/Schedule {
 	public final fun withMonths (Lkotlin/jvm/functions/Function1;)Lregolith/processes/cron/Schedule;
 }
 
-public abstract interface class regolith/processes/daemon/Daemon {
+public abstract interface class regolith/processes/daemon/Daemon : regolith/processes/daemon/DaemonFailureHandler {
 	public abstract fun onFailure (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun startDaemon (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
@@ -88,6 +88,10 @@ public final class regolith/processes/daemon/DaemonCallbacks$PrintCallbacks : re
 	public fun onDaemonRestart (Lregolith/processes/daemon/Daemon;Ljava/util/List;)V
 	public fun onDaemonStarted (Lregolith/processes/daemon/Daemon;)V
 	public fun onPanic (Lregolith/processes/daemon/Daemon;Ljava/lang/Throwable;)V
+}
+
+public abstract interface class regolith/processes/daemon/DaemonFailureHandler {
+	public abstract fun onFailure (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class regolith/processes/daemon/DaemonInitializer : regolith/init/Initializer {

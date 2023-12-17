@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+1.1.1
+-----
+
+### Changed
+
+ - `DaemonFailureHandler` broken out into its own interface.
+    No changes to functionality for daemon interface.
+
+
 1.1.0
 -----
 
