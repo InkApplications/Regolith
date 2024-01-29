@@ -1,6 +1,19 @@
 Change Log
 ==========
 
+1.2.0
+-----
+
+### Added
+
+ - New Sensors module for abstracting hardware access layers to sensor data.
+ - Added Location Interface to sensors module with a simple Android
+   implementation.
+
+### Fixed
+
+ - Fixed a publishing error with Android modules
+
 1.1.1
 -----
 

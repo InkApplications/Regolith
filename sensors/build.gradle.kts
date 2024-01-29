@@ -1,11 +1,15 @@
 plugins {
-    id("multiplatform.tier2")
+    id("multiplatform.tier3")
     id("multiplatform.android")
     id("ink.publishing")
 }
 
 android {
-    namespace = "com.inkapplications.regolith.resources"
+    namespace = "com.inkapplications.regolith.sensors"
+
+    defaultConfig {
+        minSdk = 21
+    }
 }
 
 kotlin {
@@ -16,6 +20,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.coroutines.core)
+                api(libs.spondee.units)
             }
         }
 
@@ -24,6 +29,12 @@ kotlin {
                 implementation(libs.kotlin.test.core)
                 implementation(libs.kotlin.test.junit)
                 implementation(libs.coroutines.test)
+            }
+        }
+
+        val androidMain by getting {
+            dependencies {
+                api(libs.androidx.appcompat)
             }
         }
     }

@@ -34,6 +34,14 @@ module = "org.jetbrains.kotlinx:kotlinx-datetime"
 version = "1.9.10"
 module = "org.jetbrains.dokka:dokka-gradle-plugin"
 
+[libraries.spondee-units]
+version = "1.4.0"
+module = "com.inkapplications.spondee:units"
+
+[libraries.androidx-appcompat]
+version = "1.6.1"
+module = "androidx.appcompat:appcompat"
+
 [libraries.kotlinx-binary-compatibility]
 version = "0.13.2"
 module = "org.jetbrains.kotlinx:binary-compatibility-validator"

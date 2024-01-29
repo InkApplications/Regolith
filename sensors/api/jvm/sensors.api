@@ -1,0 +1,57 @@
+public abstract interface class regolith/sensors/location/LocationAccess {
+	public abstract fun getLocationUpdates ()Lkotlinx/coroutines/flow/Flow;
+}
+
+public abstract class regolith/sensors/location/LocationError {
+}
+
+public final class regolith/sensors/location/LocationError$Disabled : regolith/sensors/location/LocationError {
+	public static final field INSTANCE Lregolith/sensors/location/LocationError$Disabled;
+}
+
+public final class regolith/sensors/location/LocationError$NotSupported : regolith/sensors/location/LocationError {
+	public static final field INSTANCE Lregolith/sensors/location/LocationError$NotSupported;
+}
+
+public final class regolith/sensors/location/LocationError$PermissionDenied : regolith/sensors/location/LocationError {
+	public static final field INSTANCE Lregolith/sensors/location/LocationError$PermissionDenied;
+}
+
+public final class regolith/sensors/location/LocationError$Unknown : regolith/sensors/location/LocationError {
+	public fun <init> (Ljava/lang/Throwable;)V
+	public final fun component1 ()Ljava/lang/Throwable;
+	public final fun copy (Ljava/lang/Throwable;)Lregolith/sensors/location/LocationError$Unknown;
+	public static synthetic fun copy$default (Lregolith/sensors/location/LocationError$Unknown;Ljava/lang/Throwable;ILjava/lang/Object;)Lregolith/sensors/location/LocationError$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCause ()Ljava/lang/Throwable;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class regolith/sensors/location/LocationState {
+}
+
+public final class regolith/sensors/location/LocationState$Known : regolith/sensors/location/LocationState {
+	public fun <init> (Linkapplications/spondee/spatial/GeoCoordinates;Linkapplications/spondee/measure/Length;)V
+	public final fun component1 ()Linkapplications/spondee/spatial/GeoCoordinates;
+	public final fun component2 ()Linkapplications/spondee/measure/Length;
+	public final fun copy (Linkapplications/spondee/spatial/GeoCoordinates;Linkapplications/spondee/measure/Length;)Lregolith/sensors/location/LocationState$Known;
+	public static synthetic fun copy$default (Lregolith/sensors/location/LocationState$Known;Linkapplications/spondee/spatial/GeoCoordinates;Linkapplications/spondee/measure/Length;ILjava/lang/Object;)Lregolith/sensors/location/LocationState$Known;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccuracy ()Linkapplications/spondee/measure/Length;
+	public final fun getCoordinates ()Linkapplications/spondee/spatial/GeoCoordinates;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class regolith/sensors/location/LocationState$Unknown : regolith/sensors/location/LocationState {
+	public fun <init> (Lregolith/sensors/location/LocationError;)V
+	public final fun component1 ()Lregolith/sensors/location/LocationError;
+	public final fun copy (Lregolith/sensors/location/LocationError;)Lregolith/sensors/location/LocationState$Unknown;
+	public static synthetic fun copy$default (Lregolith/sensors/location/LocationState$Unknown;Lregolith/sensors/location/LocationError;ILjava/lang/Object;)Lregolith/sensors/location/LocationState$Unknown;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Lregolith/sensors/location/LocationError;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+

@@ -5,4 +5,5 @@ rootProject.name = "regolith"
 include(":init")
 include(":processes")
 include(":resources")
+include(":sensors")
 include(":time-machine")
