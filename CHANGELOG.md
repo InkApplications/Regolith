@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+1.2.1
+-----
+
+### Fixed
+
+ - Fixed a publishing error with Android modules
+
 1.2.0
 -----
 
