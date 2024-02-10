@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+1.2.2
+-----
+
+### Fixed
+
+ - Fixed the request argument in `LocationUpdateConfig` by setting a minimum
+   update interval of 30 seconds for locations by default.
+
 1.2.1
 -----
 

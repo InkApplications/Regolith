@@ -2,6 +2,7 @@ package regolith.sensors.location
 
 import android.location.LocationManager
 import androidx.core.location.LocationRequestCompat
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * Configures the location update frequency and specificity.
@@ -15,6 +16,7 @@ data class LocationUpdateConfig(
      */
     val request: LocationRequestCompat = LocationRequestCompat
         .Builder(LocationRequestCompat.PASSIVE_INTERVAL)
+        .setMinUpdateIntervalMillis(30.seconds.inWholeMilliseconds)
         .build(),
 
     /**
