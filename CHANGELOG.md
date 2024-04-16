@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+1.3.0
+-----
+
+### Added
+
+ - New data module for for storage abstractions.
+ - Added a settings system to data module for key/value storage of
+   application configurations.
+
 1.2.2
 -----
 

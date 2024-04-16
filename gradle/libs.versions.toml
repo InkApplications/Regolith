@@ -1,6 +1,8 @@
 [versions]
 kotlin = "1.9.23"
 coroutines = "1.8.0"
+sqldelight = "2.0.1"
+watermelon = "1.5.0"
 
 [libraries.kotlin-gradle]
 version.ref = "kotlin"
@@ -45,3 +47,35 @@ module = "androidx.appcompat:appcompat"
 [libraries.kotlinx-binary-compatibility]
 version = "0.13.2"
 module = "org.jetbrains.kotlinx:binary-compatibility-validator"
+
+[libraries.watermelon-data]
+version.ref = "watermelon"
+module = "com.inkapplications.watermelon:data"
+
+[libraries.sqldelight-gradle]
+version.ref = "sqldelight"
+module = "app.cash.sqldelight:app.cash.sqldelight.gradle.plugin"
+
+[libraries.sqldelight-coroutines]
+version.ref = "sqldelight"
+module = "app.cash.sqldelight:coroutines-extensions"
+
+[libraries.sqldelight-android]
+version.ref = "sqldelight"
+module = "app.cash.sqldelight:android-driver"
+
+[libraries.sqldelight-jvm]
+version.ref = "sqldelight"
+module = "app.cash.sqldelight:sqlite-driver"
+
+[libraries.sqldelight-js]
+version.ref = "sqldelight"
+module = "app.cash.sqldelight:sqljs-driver"
+
+[libraries.sqldelight-native]
+version.ref = "sqldelight"
+module = "app.cash.sqldelight:native-driver"
+
+[libraries.sqldelight-web-worker-driver]
+version = "2.0.0"
+module = "app.cash.sqldelight:web-worker-driver"

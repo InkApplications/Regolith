@@ -7,11 +7,11 @@ repositories {
 }
 
 kotlin {
+    applyDefaultHierarchyTemplate()
     jvmToolchain(11)
     jvm()
     js(IR) {
         nodejs()
-        browser()
         browser {
             testTask {
                 useKarma {

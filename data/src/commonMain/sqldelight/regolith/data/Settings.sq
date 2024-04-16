@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS SETTINGS(
+    key TEXT PRIMARY KEY,
+    stringValue TEXT,
+    intValue INTEGER,
+    realValue REAL,
+    blobValue BLOB
+);
+
+setStringValue:
+INSERT OR REPLACE INTO SETTINGS (key, stringValue) VALUES (?, ?);
+
+getStringValue:
+SELECT stringValue FROM SETTINGS WHERE key = ?;
+
+setIntValue:
+INSERT OR REPLACE INTO SETTINGS (key, intValue) VALUES (?, ?);
+
+getIntValue:
+SELECT intValue FROM SETTINGS WHERE key = ?;
+
+setRealValue:
+INSERT OR REPLACE INTO SETTINGS (key, realValue) VALUES (?, ?);
+
+getRealValue:
+SELECT realValue FROM SETTINGS WHERE key = ?;
+
+setBlobValue:
+INSERT OR REPLACE INTO SETTINGS (key, blobValue) VALUES (?, ?);
+
+getBlobValue:
+SELECT blobValue FROM SETTINGS WHERE key = ?;
