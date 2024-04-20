@@ -18,6 +18,11 @@ class SettingsCollection(
     }
 
     /**
+     * Convenience constructor for varargs.
+     */
+    constructor(vararg settings: Setting<*>): this(settings.toList())
+
+    /**
      * Get a single setting by its key.
      */
     fun findByKey(key: String): Setting<*>? {
@@ -46,6 +51,10 @@ class SettingsCollection(
         return settings.groupBy { it.level }
             .map { (level, settings) -> level to settings }
             .sortedBy { (level, _) -> level.ordinal }
+    }
+
+    operator fun plus(other: SettingsCollection): SettingsCollection {
+        return SettingsCollection(settings + other.settings)
     }
 
     override fun toString(): String {
