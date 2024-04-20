@@ -443,6 +443,7 @@ public abstract interface class regolith/data/settings/structure/Setting : regol
 
 public final class regolith/data/settings/structure/SettingsCollection : java/util/Collection, kotlin/jvm/internal/markers/KMappedMarker {
 	public fun <init> (Ljava/util/Collection;)V
+	public fun <init> ([Lregolith/data/settings/structure/Setting;)V
 	public synthetic fun add (Ljava/lang/Object;)Z
 	public fun add (Lregolith/data/settings/structure/Setting;)Z
 	public fun addAll (Ljava/util/Collection;)Z
@@ -456,6 +457,7 @@ public final class regolith/data/settings/structure/SettingsCollection : java/ut
 	public final fun groupByLevel ()Ljava/util/List;
 	public fun isEmpty ()Z
 	public fun iterator ()Ljava/util/Iterator;
+	public final fun plus (Lregolith/data/settings/structure/SettingsCollection;)Lregolith/data/settings/structure/SettingsCollection;
 	public fun remove (Ljava/lang/Object;)Z
 	public fun removeAll (Ljava/util/Collection;)Z
 	public fun removeIf (Ljava/util/function/Predicate;)Z
