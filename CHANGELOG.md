@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+1.5.0
+-----
+
+### Changed
+
+ - Update to Kotlin 2.0.0
 
 1.4.0
 -----

@@ -15,7 +15,6 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(libs.kotlin.test.core)
-                implementation(libs.kotlin.test.junit)
                 implementation(libs.coroutines.test)
             }
         }
