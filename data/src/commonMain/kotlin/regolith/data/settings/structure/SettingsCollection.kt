@@ -6,6 +6,7 @@ import regolith.data.settings.SettingLevel
 /**
  * Wraps a collection to provide additional functionality and validation.
  */
+@Deprecated("Use a generic Collection<Setting<*>> instead.")
 class SettingsCollection(
     private val settings: Collection<Setting<*>>
 ): Collection<Setting<*>> by settings {

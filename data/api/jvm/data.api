@@ -786,6 +786,12 @@ public final class regolith/data/settings/structure/SettingsCollection : java/ut
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class regolith/data/settings/structure/SettingsCollectionsKt {
+	public static final fun findByKey (Ljava/util/Collection;Ljava/lang/String;)Lregolith/data/settings/structure/Setting;
+	public static final fun groupByCategory (Ljava/util/Collection;)Ljava/util/List;
+	public static final fun groupByLevel (Ljava/util/Collection;)Ljava/util/List;
+}
+
 public final class regolith/data/settings/structure/StringData : regolith/data/settings/structure/DataSetting {
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
