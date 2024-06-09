@@ -20,4 +20,6 @@ sealed interface PrimitiveSetting<STORED>: Setting<STORED>, Validated<STORED> {
      * user input before it is stored. eg. trimming whitespace or formatting.
      */
     val inputTransformer: DataTransformer<STORED, STORED>
+
+    fun toEntry(value: STORED): SettingEntry<STORED, PrimitiveSetting<STORED>>
 }

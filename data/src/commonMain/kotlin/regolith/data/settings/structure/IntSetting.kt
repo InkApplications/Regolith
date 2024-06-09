@@ -24,6 +24,7 @@ class IntSetting(
     override val category: SettingCategory? = null,
     override val description: String? = null,
     override val level: SettingLevel = SettingLevel.DEFAULT,
+    val entryFactory: (IntSetting, Int?) -> SettingEntry<Int?, IntSetting> = ::Entry,
 ): DataSetting<Long?, Int?> {
     override val dataTransformer: DataTransformer<Long?, Int?> = LongToInt.nullable()
     override fun toPrimitive(): PrimitiveSetting<Long?> {
@@ -38,5 +39,11 @@ class IntSetting(
             level = level,
         )
     }
+    override fun toEntry(value: Int?) = entryFactory(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry(
+        override val setting: IntSetting,
+        override val value: Int?
+    ): SettingEntry<Int?, IntSetting>
 }

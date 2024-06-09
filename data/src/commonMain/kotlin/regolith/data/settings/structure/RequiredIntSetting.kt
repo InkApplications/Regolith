@@ -15,6 +15,7 @@ class RequiredIntSetting(
     override val category: SettingCategory? = null,
     override val description: String? = null,
     override val inputValidator: DataValidator<Int> = PassingValidator,
+    val entryFactory: (RequiredIntSetting, Int) -> SettingEntry<Int, RequiredIntSetting> = ::Entry,
 ): DataSetting<Long?, Int> {
     override val dataTransformer: DataTransformer<Long?, Int> = LongTransformations.LongToInt.nullable().then(DefaultingTransformer(defaultValue))
     override fun toPrimitive(): PrimitiveSetting<Long?> {
@@ -29,4 +30,12 @@ class RequiredIntSetting(
             level = level,
         )
     }
+
+    override fun toEntry(value: Int) = entryFactory(this, value)
+    override fun toString(): String = "Setting($key)"
+
+    data class Entry(
+        override val setting: RequiredIntSetting,
+        override val value: Int,
+    ): SettingEntry<Int, RequiredIntSetting>
 }

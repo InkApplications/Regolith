@@ -15,6 +15,7 @@ class RequiredStringSetting(
     override val category: SettingCategory? = null,
     override val description: String? = null,
     override val inputValidator: DataValidator<String> = PassingValidator,
+    val entryFactory: (RequiredStringSetting, String) -> SettingEntry<String, RequiredStringSetting> = ::Entry,
 ): DataSetting<String?, String> {
     override val dataTransformer: DataTransformer<String?, String> = DefaultingTransformer(defaultValue)
     override fun toPrimitive(): PrimitiveSetting<String?> {
@@ -29,5 +30,12 @@ class RequiredStringSetting(
             level = level,
         )
     }
+
+    override fun toEntry(value: String) = entryFactory(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry(
+        override val setting: RequiredStringSetting,
+        override val value: String,
+    ): SettingEntry<String, RequiredStringSetting>
 }

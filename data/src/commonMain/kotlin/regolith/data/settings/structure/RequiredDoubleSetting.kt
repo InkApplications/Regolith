@@ -20,6 +20,7 @@ class RequiredDoubleSetting(
     override val category: SettingCategory? = null,
     override val description: String? = null,
     override val inputValidator: DataValidator<Double> = PassingValidator,
+    val entryFactory: (RequiredDoubleSetting, Double) -> SettingEntry<Double, RequiredDoubleSetting> = ::Entry,
 ): DataSetting<Double?, Double> {
     override val dataTransformer: DataTransformer<Double?, Double> = DefaultingTransformer(defaultValue)
     override fun toPrimitive(): PrimitiveSetting<Double?> {
@@ -34,5 +35,11 @@ class RequiredDoubleSetting(
             level = level,
         )
     }
+    override fun toEntry(value: Double) = entryFactory(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry(
+        override val setting: RequiredDoubleSetting,
+        override val value: Double
+    ): SettingEntry<Double, RequiredDoubleSetting>
 }

@@ -20,5 +20,11 @@ class LongSetting(
     override val description: String? = null,
     override val level: SettingLevel = SettingLevel.DEFAULT,
 ): PrimitiveSetting<Long?> {
+    override fun toEntry(value: Long?) = Entry(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry(
+        override val setting: LongSetting,
+        override val value: Long?
+    ): SettingEntry<Long?, LongSetting>
 }

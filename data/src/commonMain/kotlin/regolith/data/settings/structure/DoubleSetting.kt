@@ -20,5 +20,11 @@ class DoubleSetting(
     override val description: String? = null,
     override val level: SettingLevel = SettingLevel.DEFAULT,
 ): PrimitiveSetting<Double?> {
+    override fun toEntry(value: Double?) = Entry(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry(
+        override val setting: DoubleSetting,
+        override val value: Double?
+    ): SettingEntry<Double?, DoubleSetting>
 }

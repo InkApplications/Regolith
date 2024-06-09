@@ -37,5 +37,11 @@ class BooleanSetting(
         )
     }
 
+    override fun toEntry(value: Boolean) = Entry(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry(
+        override val setting: BooleanSetting,
+        override val value: Boolean,
+    ): SettingEntry<Boolean, BooleanSetting>
 }

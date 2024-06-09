@@ -20,5 +20,11 @@ class BlobSetting(
     override val description: String? = null,
     override val level: SettingLevel = SettingLevel.DEFAULT,
 ): PrimitiveSetting<ByteArray?> {
+    override fun toEntry(value: ByteArray?) = Entry(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry(
+        override val setting: BlobSetting,
+        override val value: ByteArray?
+    ): SettingEntry<ByteArray?, BlobSetting>
 }

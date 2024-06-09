@@ -1,6 +1,20 @@
 Change Log
 ==========
 
+1.6.0
+-----
+
+### Added
+
+ - Added Extension methods for Setting Collections.
+ - Added Entry data structures to settings for pairing keys and values together.
+ - Added extension methods to look up a collection of settings, returned as entries.
+ - Added Extension methods for Setting Collections.
+
+ ### Deprecated
+
+ - Deprecated `SettingsCollection` in favor of a generic collection of Settings.
+
 1.5.0
 -----
 

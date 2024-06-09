@@ -20,6 +20,7 @@ class DoubleData<DATA>(
     override val category: SettingCategory? = null,
     override val description: String? = null,
     override val level: SettingLevel = SettingLevel.DEFAULT,
+    val entryFactory: (DoubleData<DATA>, DATA) -> SettingEntry<DATA, DoubleData<DATA>> = ::Entry,
 ): DataSetting<Double?, DATA> {
     override fun toPrimitive(): PrimitiveSetting<Double?> {
         return DoubleSetting(
@@ -34,5 +35,11 @@ class DoubleData<DATA>(
         )
     }
 
+    override fun toEntry(value: DATA) = entryFactory(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry<DATA>(
+        override val setting: DoubleData<DATA>,
+        override val value: DATA,
+    ): SettingEntry<DATA, DoubleData<DATA>>
 }
