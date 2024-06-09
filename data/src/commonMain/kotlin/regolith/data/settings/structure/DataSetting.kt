@@ -8,7 +8,7 @@ import regolith.data.settings.Validated
  *
  * @param DATA The structured data type for the setting.
  */
-interface DataSetting<STORED, DATA>: Setting<STORED>, Validated<DATA> {
+interface DataSetting<STORED, DATA>: Setting<DATA>, Validated<DATA> {
     /**
      * The initial value when the application is first run.
      */
@@ -23,4 +23,6 @@ interface DataSetting<STORED, DATA>: Setting<STORED>, Validated<DATA> {
      * Get the primitive setting definition used for the stored data.
      */
     fun toPrimitive(): PrimitiveSetting<STORED>
+
+    fun toEntry(value: DATA): SettingEntry<DATA, DataSetting<STORED, DATA>>
 }

@@ -20,6 +20,7 @@ class RequiredBlobSetting(
     override val category: SettingCategory? = null,
     override val description: String? = null,
     override val inputValidator: DataValidator<ByteArray> = PassingValidator,
+    val entryFactory: (RequiredBlobSetting, ByteArray) -> SettingEntry<ByteArray, RequiredBlobSetting> = ::Entry,
 ): DataSetting<ByteArray?, ByteArray> {
     override val dataTransformer: DataTransformer<ByteArray?, ByteArray> = DefaultingTransformer(defaultValue)
 
@@ -36,5 +37,11 @@ class RequiredBlobSetting(
         )
     }
 
+    override fun toEntry(value: ByteArray) = entryFactory(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry(
+        override val setting: RequiredBlobSetting,
+        override val value: ByteArray
+    ): SettingEntry<ByteArray, RequiredBlobSetting>
 }

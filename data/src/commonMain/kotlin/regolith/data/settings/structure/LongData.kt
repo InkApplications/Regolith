@@ -20,6 +20,7 @@ class LongData<DATA>(
     override val category: SettingCategory? = null,
     override val description: String? = null,
     override val level: SettingLevel = SettingLevel.DEFAULT,
+    val entryFactory: (LongData<DATA>, DATA) -> SettingEntry<DATA, LongData<DATA>> = ::Entry,
 ): DataSetting<Long?, DATA> {
     override fun toPrimitive(): PrimitiveSetting<Long?> {
         return LongSetting(
@@ -34,5 +35,11 @@ class LongData<DATA>(
         )
     }
 
+    override fun toEntry(value: DATA) = entryFactory(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry<DATA>(
+        override val setting: LongData<DATA>,
+        override val value: DATA,
+    ): SettingEntry<DATA, LongData<DATA>>
 }

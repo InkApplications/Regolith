@@ -21,6 +21,7 @@ class StringData<DATA>(
     override val category: SettingCategory? = null,
     override val description: String? = null,
     override val level: SettingLevel = SettingLevel.DEFAULT,
+    val entryFactory: (StringData<DATA>, DATA) -> SettingEntry<DATA, StringData<DATA>> = ::Entry,
 ): DataSetting<String?, DATA> {
     override fun toPrimitive(): PrimitiveSetting<String?> {
         return StringSetting(
@@ -35,6 +36,12 @@ class StringData<DATA>(
         )
     }
 
+    override fun toEntry(value: DATA) = entryFactory(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry<DATA>(
+        override val setting: StringData<DATA>,
+        override val value: DATA,
+    ): SettingEntry<DATA, StringData<DATA>>
 }
 

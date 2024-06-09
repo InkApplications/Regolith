@@ -22,6 +22,7 @@ class IntData<DATA>(
     override val category: SettingCategory? = null,
     override val description: String? = null,
     override val level: SettingLevel = SettingLevel.DEFAULT,
+    val entryFactory: (IntData<DATA>, DATA) -> SettingEntry<DATA, IntData<DATA>> = ::Entry,
 ): DataSetting<Long?, DATA> {
     override val dataTransformer: DataTransformer<Long?, DATA> = LongTransformations.LongToInt.nullable()
         .then(intDataTransformer)
@@ -38,5 +39,11 @@ class IntData<DATA>(
         )
     }
 
+    override fun toEntry(value: DATA) = entryFactory(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry<DATA>(
+        override val setting: IntData<DATA>,
+        override val value: DATA,
+    ): SettingEntry<DATA, IntData<DATA>>
 }

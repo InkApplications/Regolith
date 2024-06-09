@@ -141,7 +141,9 @@ public abstract interface class regolith/data/settings/SettingsAccess {
 
 public final class regolith/data/settings/SettingsAccessKt {
 	public static final fun getSetting (Lregolith/data/settings/SettingsAccess;Lregolith/data/settings/structure/DataSetting;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun getSettings (Lregolith/data/settings/SettingsAccess;Ljava/util/Collection;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static final fun observeSetting (Lregolith/data/settings/SettingsAccess;Lregolith/data/settings/structure/DataSetting;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun observeSettings (Lregolith/data/settings/SettingsAccess;Ljava/util/Collection;)Lkotlinx/coroutines/flow/Flow;
 	public static final fun writeSetting (Lregolith/data/settings/SettingsAccess;Lregolith/data/settings/structure/DataSetting;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
@@ -150,17 +152,33 @@ public abstract interface class regolith/data/settings/Validated {
 }
 
 public final class regolith/data/settings/structure/BlobData : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class regolith/data/settings/structure/BlobData$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/BlobData;Ljava/lang/Object;)V
+	public final fun component1 ()Lregolith/data/settings/structure/BlobData;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun copy (Lregolith/data/settings/structure/BlobData;Ljava/lang/Object;)Lregolith/data/settings/structure/BlobData$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/BlobData$Entry;Lregolith/data/settings/structure/BlobData;Ljava/lang/Object;ILjava/lang/Object;)Lregolith/data/settings/structure/BlobData$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/BlobData;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -176,21 +194,54 @@ public final class regolith/data/settings/structure/BlobSetting : regolith/data/
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public synthetic fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
+	public fun toEntry ([B)Lregolith/data/settings/structure/BlobSetting$Entry;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class regolith/data/settings/structure/BlobSetting$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/BlobSetting;[B)V
+	public final fun component1 ()Lregolith/data/settings/structure/BlobSetting;
+	public final fun component2 ()[B
+	public final fun copy (Lregolith/data/settings/structure/BlobSetting;[B)Lregolith/data/settings/structure/BlobSetting$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/BlobSetting$Entry;Lregolith/data/settings/structure/BlobSetting;[BILjava/lang/Object;)Lregolith/data/settings/structure/BlobSetting$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/BlobSetting;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public synthetic fun getValue ()Ljava/lang/Object;
+	public fun getValue ()[B
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
 public final class regolith/data/settings/structure/BooleanData : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class regolith/data/settings/structure/BooleanData$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/BooleanData;Ljava/lang/Object;)V
+	public final fun component1 ()Lregolith/data/settings/structure/BooleanData;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun copy (Lregolith/data/settings/structure/BooleanData;Ljava/lang/Object;)Lregolith/data/settings/structure/BooleanData$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/BooleanData$Entry;Lregolith/data/settings/structure/BooleanData;Ljava/lang/Object;ILjava/lang/Object;)Lregolith/data/settings/structure/BooleanData$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/BooleanData;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -206,28 +257,62 @@ public final class regolith/data/settings/structure/BooleanSetting : regolith/da
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public synthetic fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
+	public fun toEntry (Z)Lregolith/data/settings/structure/BooleanSetting$Entry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class regolith/data/settings/structure/BooleanSetting$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/BooleanSetting;Z)V
+	public final fun component1 ()Lregolith/data/settings/structure/BooleanSetting;
+	public final fun component2 ()Z
+	public final fun copy (Lregolith/data/settings/structure/BooleanSetting;Z)Lregolith/data/settings/structure/BooleanSetting$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/BooleanSetting$Entry;Lregolith/data/settings/structure/BooleanSetting;ZILjava/lang/Object;)Lregolith/data/settings/structure/BooleanSetting$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/BooleanSetting;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Boolean;
+	public synthetic fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
 public abstract interface class regolith/data/settings/structure/DataSetting : regolith/data/settings/Validated, regolith/data/settings/structure/Setting {
 	public abstract fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public abstract fun getDefaultValue ()Ljava/lang/Object;
+	public abstract fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 	public abstract fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
 }
 
 public final class regolith/data/settings/structure/DoubleData : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class regolith/data/settings/structure/DoubleData$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/DoubleData;Ljava/lang/Object;)V
+	public final fun component1 ()Lregolith/data/settings/structure/DoubleData;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun copy (Lregolith/data/settings/structure/DoubleData;Ljava/lang/Object;)Lregolith/data/settings/structure/DoubleData$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/DoubleData$Entry;Lregolith/data/settings/structure/DoubleData;Ljava/lang/Object;ILjava/lang/Object;)Lregolith/data/settings/structure/DoubleData$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/DoubleData;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -243,83 +328,184 @@ public final class regolith/data/settings/structure/DoubleSetting : regolith/dat
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (Ljava/lang/Double;)Lregolith/data/settings/structure/DoubleSetting$Entry;
+	public synthetic fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class regolith/data/settings/structure/DoubleSetting$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/DoubleSetting;Ljava/lang/Double;)V
+	public final fun component1 ()Lregolith/data/settings/structure/DoubleSetting;
+	public final fun component2 ()Ljava/lang/Double;
+	public final fun copy (Lregolith/data/settings/structure/DoubleSetting;Ljava/lang/Double;)Lregolith/data/settings/structure/DoubleSetting$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/DoubleSetting$Entry;Lregolith/data/settings/structure/DoubleSetting;Ljava/lang/Double;ILjava/lang/Object;)Lregolith/data/settings/structure/DoubleSetting$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/DoubleSetting;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Double;
+	public synthetic fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
 public final class regolith/data/settings/structure/FloatData : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class regolith/data/settings/structure/FloatData$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/FloatData;Ljava/lang/Object;)V
+	public final fun component1 ()Lregolith/data/settings/structure/FloatData;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun copy (Lregolith/data/settings/structure/FloatData;Ljava/lang/Object;)Lregolith/data/settings/structure/FloatData$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/FloatData$Entry;Lregolith/data/settings/structure/FloatData;Ljava/lang/Object;ILjava/lang/Object;)Lregolith/data/settings/structure/FloatData$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/FloatData;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class regolith/data/settings/structure/FloatSetting : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Float;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Float;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Float;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Float;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public fun getDefaultValue ()Ljava/lang/Float;
 	public synthetic fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (Ljava/lang/Float;)Lregolith/data/settings/structure/SettingEntry;
+	public synthetic fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class regolith/data/settings/structure/FloatSetting$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/FloatSetting;Ljava/lang/Float;)V
+	public final fun component1 ()Lregolith/data/settings/structure/FloatSetting;
+	public final fun component2 ()Ljava/lang/Float;
+	public final fun copy (Lregolith/data/settings/structure/FloatSetting;Ljava/lang/Float;)Lregolith/data/settings/structure/FloatSetting$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/FloatSetting$Entry;Lregolith/data/settings/structure/FloatSetting;Ljava/lang/Float;ILjava/lang/Object;)Lregolith/data/settings/structure/FloatSetting$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/FloatSetting;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Float;
+	public synthetic fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
 public final class regolith/data/settings/structure/IntData : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class regolith/data/settings/structure/IntData$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/IntData;Ljava/lang/Object;)V
+	public final fun component1 ()Lregolith/data/settings/structure/IntData;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun copy (Lregolith/data/settings/structure/IntData;Ljava/lang/Object;)Lregolith/data/settings/structure/IntData$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/IntData$Entry;Lregolith/data/settings/structure/IntData;Ljava/lang/Object;ILjava/lang/Object;)Lregolith/data/settings/structure/IntData$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/IntData;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class regolith/data/settings/structure/IntSetting : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public fun getDefaultValue ()Ljava/lang/Integer;
 	public synthetic fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (Ljava/lang/Integer;)Lregolith/data/settings/structure/SettingEntry;
+	public synthetic fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class regolith/data/settings/structure/IntSetting$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/IntSetting;Ljava/lang/Integer;)V
+	public final fun component1 ()Lregolith/data/settings/structure/IntSetting;
+	public final fun component2 ()Ljava/lang/Integer;
+	public final fun copy (Lregolith/data/settings/structure/IntSetting;Ljava/lang/Integer;)Lregolith/data/settings/structure/IntSetting$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/IntSetting$Entry;Lregolith/data/settings/structure/IntSetting;Ljava/lang/Integer;ILjava/lang/Object;)Lregolith/data/settings/structure/IntSetting$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/IntSetting;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Integer;
+	public synthetic fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class regolith/data/settings/structure/LongData : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class regolith/data/settings/structure/LongData$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/LongData;Ljava/lang/Object;)V
+	public final fun component1 ()Lregolith/data/settings/structure/LongData;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun copy (Lregolith/data/settings/structure/LongData;Ljava/lang/Object;)Lregolith/data/settings/structure/LongData$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/LongData$Entry;Lregolith/data/settings/structure/LongData;Ljava/lang/Object;ILjava/lang/Object;)Lregolith/data/settings/structure/LongData$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/LongData;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -335,110 +521,242 @@ public final class regolith/data/settings/structure/LongSetting : regolith/data/
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (Ljava/lang/Long;)Lregolith/data/settings/structure/LongSetting$Entry;
+	public synthetic fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class regolith/data/settings/structure/LongSetting$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/LongSetting;Ljava/lang/Long;)V
+	public final fun component1 ()Lregolith/data/settings/structure/LongSetting;
+	public final fun component2 ()Ljava/lang/Long;
+	public final fun copy (Lregolith/data/settings/structure/LongSetting;Ljava/lang/Long;)Lregolith/data/settings/structure/LongSetting$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/LongSetting$Entry;Lregolith/data/settings/structure/LongSetting;Ljava/lang/Long;ILjava/lang/Object;)Lregolith/data/settings/structure/LongSetting$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/LongSetting;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Long;
+	public synthetic fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
 public abstract interface class regolith/data/settings/structure/PrimitiveSetting : regolith/data/settings/Validated, regolith/data/settings/structure/Setting {
 	public abstract fun getDefaultValue ()Ljava/lang/Object;
 	public abstract fun getInputTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
+	public abstract fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 }
 
 public final class regolith/data/settings/structure/RequiredBlobSetting : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;[BLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;[BLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;[BLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;[BLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public synthetic fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDefaultValue ()[B
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public synthetic fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
+	public fun toEntry ([B)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class regolith/data/settings/structure/RequiredBlobSetting$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/RequiredBlobSetting;[B)V
+	public final fun component1 ()Lregolith/data/settings/structure/RequiredBlobSetting;
+	public final fun component2 ()[B
+	public final fun copy (Lregolith/data/settings/structure/RequiredBlobSetting;[B)Lregolith/data/settings/structure/RequiredBlobSetting$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/RequiredBlobSetting$Entry;Lregolith/data/settings/structure/RequiredBlobSetting;[BILjava/lang/Object;)Lregolith/data/settings/structure/RequiredBlobSetting$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/RequiredBlobSetting;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public synthetic fun getValue ()Ljava/lang/Object;
+	public fun getValue ()[B
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class regolith/data/settings/structure/RequiredDoubleSetting : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;DLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;DLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;DLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;DLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public fun getDefaultValue ()Ljava/lang/Double;
 	public synthetic fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (D)Lregolith/data/settings/structure/SettingEntry;
+	public synthetic fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class regolith/data/settings/structure/RequiredDoubleSetting$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/RequiredDoubleSetting;D)V
+	public final fun component1 ()Lregolith/data/settings/structure/RequiredDoubleSetting;
+	public final fun component2 ()D
+	public final fun copy (Lregolith/data/settings/structure/RequiredDoubleSetting;D)Lregolith/data/settings/structure/RequiredDoubleSetting$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/RequiredDoubleSetting$Entry;Lregolith/data/settings/structure/RequiredDoubleSetting;DILjava/lang/Object;)Lregolith/data/settings/structure/RequiredDoubleSetting$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/RequiredDoubleSetting;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Double;
+	public synthetic fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class regolith/data/settings/structure/RequiredFloatSetting : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;FLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;FLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;FLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;FLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public fun getDefaultValue ()Ljava/lang/Float;
 	public synthetic fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (F)Lregolith/data/settings/structure/SettingEntry;
+	public synthetic fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class regolith/data/settings/structure/RequiredFloatSetting$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/RequiredFloatSetting;F)V
+	public final fun component1 ()Lregolith/data/settings/structure/RequiredFloatSetting;
+	public final fun component2 ()F
+	public final fun copy (Lregolith/data/settings/structure/RequiredFloatSetting;F)Lregolith/data/settings/structure/RequiredFloatSetting$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/RequiredFloatSetting$Entry;Lregolith/data/settings/structure/RequiredFloatSetting;FILjava/lang/Object;)Lregolith/data/settings/structure/RequiredFloatSetting$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/RequiredFloatSetting;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Float;
+	public synthetic fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class regolith/data/settings/structure/RequiredIntSetting : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;ILregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;ILregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public fun getDefaultValue ()Ljava/lang/Integer;
 	public synthetic fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (I)Lregolith/data/settings/structure/SettingEntry;
+	public synthetic fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class regolith/data/settings/structure/RequiredIntSetting$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/RequiredIntSetting;I)V
+	public final fun component1 ()Lregolith/data/settings/structure/RequiredIntSetting;
+	public final fun component2 ()I
+	public final fun copy (Lregolith/data/settings/structure/RequiredIntSetting;I)Lregolith/data/settings/structure/RequiredIntSetting$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/RequiredIntSetting$Entry;Lregolith/data/settings/structure/RequiredIntSetting;IILjava/lang/Object;)Lregolith/data/settings/structure/RequiredIntSetting$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/RequiredIntSetting;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Integer;
+	public synthetic fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class regolith/data/settings/structure/RequiredLongSetting : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;JLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;JLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;JLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;JLregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public fun getDefaultValue ()Ljava/lang/Long;
 	public synthetic fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (J)Lregolith/data/settings/structure/SettingEntry;
+	public synthetic fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class regolith/data/settings/structure/RequiredLongSetting$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/RequiredLongSetting;J)V
+	public final fun component1 ()Lregolith/data/settings/structure/RequiredLongSetting;
+	public final fun component2 ()J
+	public final fun copy (Lregolith/data/settings/structure/RequiredLongSetting;J)Lregolith/data/settings/structure/RequiredLongSetting$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/RequiredLongSetting$Entry;Lregolith/data/settings/structure/RequiredLongSetting;JILjava/lang/Object;)Lregolith/data/settings/structure/RequiredLongSetting$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/RequiredLongSetting;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getValue ()Ljava/lang/Long;
+	public synthetic fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class regolith/data/settings/structure/RequiredStringSetting : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lcom/inkapplications/data/validator/DataValidator;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public synthetic fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDefaultValue ()Ljava/lang/String;
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public synthetic fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
+	public fun toEntry (Ljava/lang/String;)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class regolith/data/settings/structure/RequiredStringSetting$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/RequiredStringSetting;Ljava/lang/String;)V
+	public final fun component1 ()Lregolith/data/settings/structure/RequiredStringSetting;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Lregolith/data/settings/structure/RequiredStringSetting;Ljava/lang/String;)Lregolith/data/settings/structure/RequiredStringSetting$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/RequiredStringSetting$Entry;Lregolith/data/settings/structure/RequiredStringSetting;Ljava/lang/String;ILjava/lang/Object;)Lregolith/data/settings/structure/RequiredStringSetting$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSetting ()Lregolith/data/settings/structure/RequiredStringSetting;
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public synthetic fun getValue ()Ljava/lang/Object;
+	public fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public abstract interface class regolith/data/settings/structure/Setting : regolith/data/settings/Described, regolith/data/settings/Keyed {
+}
+
+public abstract interface class regolith/data/settings/structure/SettingEntry {
+	public abstract fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public abstract fun getValue ()Ljava/lang/Object;
 }
 
 public final class regolith/data/settings/structure/SettingsCollection : java/util/Collection, kotlin/jvm/internal/markers/KMappedMarker {
@@ -469,18 +787,34 @@ public final class regolith/data/settings/structure/SettingsCollection : java/ut
 }
 
 public final class regolith/data/settings/structure/StringData : regolith/data/settings/structure/DataSetting {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/inkapplications/data/transformer/DataTransformer;Ljava/lang/Object;Lcom/inkapplications/data/validator/DataValidator;Lcom/inkapplications/data/validator/DataValidator;Lregolith/data/settings/SettingCategory;Ljava/lang/String;Lregolith/data/settings/SettingLevel;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCategory ()Lregolith/data/settings/SettingCategory;
 	public fun getDataTransformer ()Lcom/inkapplications/data/transformer/DataTransformer;
 	public final fun getDataValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getDefaultValue ()Ljava/lang/Object;
 	public fun getDescription ()Ljava/lang/String;
+	public final fun getEntryFactory ()Lkotlin/jvm/functions/Function2;
 	public fun getInputValidator ()Lcom/inkapplications/data/validator/DataValidator;
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
 	public fun toPrimitive ()Lregolith/data/settings/structure/PrimitiveSetting;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class regolith/data/settings/structure/StringData$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/StringData;Ljava/lang/Object;)V
+	public final fun component1 ()Lregolith/data/settings/structure/StringData;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun copy (Lregolith/data/settings/structure/StringData;Ljava/lang/Object;)Lregolith/data/settings/structure/StringData$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/StringData$Entry;Lregolith/data/settings/structure/StringData;Ljava/lang/Object;ILjava/lang/Object;)Lregolith/data/settings/structure/StringData$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getSetting ()Lregolith/data/settings/structure/StringData;
+	public fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -496,6 +830,23 @@ public final class regolith/data/settings/structure/StringSetting : regolith/dat
 	public fun getKey ()Ljava/lang/String;
 	public fun getLevel ()Lregolith/data/settings/SettingLevel;
 	public fun getName ()Ljava/lang/String;
+	public synthetic fun toEntry (Ljava/lang/Object;)Lregolith/data/settings/structure/SettingEntry;
+	public fun toEntry (Ljava/lang/String;)Lregolith/data/settings/structure/StringSetting$Entry;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class regolith/data/settings/structure/StringSetting$Entry : regolith/data/settings/structure/SettingEntry {
+	public fun <init> (Lregolith/data/settings/structure/StringSetting;Ljava/lang/String;)V
+	public final fun component1 ()Lregolith/data/settings/structure/StringSetting;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Lregolith/data/settings/structure/StringSetting;Ljava/lang/String;)Lregolith/data/settings/structure/StringSetting$Entry;
+	public static synthetic fun copy$default (Lregolith/data/settings/structure/StringSetting$Entry;Lregolith/data/settings/structure/StringSetting;Ljava/lang/String;ILjava/lang/Object;)Lregolith/data/settings/structure/StringSetting$Entry;
+	public fun equals (Ljava/lang/Object;)Z
+	public synthetic fun getSetting ()Lregolith/data/settings/structure/Setting;
+	public fun getSetting ()Lregolith/data/settings/structure/StringSetting;
+	public synthetic fun getValue ()Ljava/lang/Object;
+	public fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 

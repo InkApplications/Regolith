@@ -19,5 +19,11 @@ class StringSetting(
     override val description: String? = null,
     override val level: SettingLevel = SettingLevel.DEFAULT,
 ): PrimitiveSetting<String?> {
+    override fun toEntry(value: String?) = Entry(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry(
+        override val setting: StringSetting,
+        override val value: String?
+    ): SettingEntry<String?, StringSetting>
 }

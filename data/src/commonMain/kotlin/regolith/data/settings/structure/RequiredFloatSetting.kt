@@ -18,6 +18,7 @@ class RequiredFloatSetting(
     override val category: SettingCategory? = null,
     override val description: String? = null,
     override val inputValidator: DataValidator<Float> = PassingValidator,
+    val entryFactory: (RequiredFloatSetting, Float) -> SettingEntry<Float, RequiredFloatSetting> = ::Entry,
 ): DataSetting<Double?, Float> {
     override val dataTransformer: DataTransformer<Double?, Float> = DoubleTransformations.DoubleToFloat.nullable()
         .then(DefaultingTransformer(defaultValue))
@@ -34,5 +35,12 @@ class RequiredFloatSetting(
             level = level,
         )
     }
+
+    override fun toEntry(value: Float) = entryFactory(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry(
+        override val setting: RequiredFloatSetting,
+        override val value: Float
+    ): SettingEntry<Float, RequiredFloatSetting>
 }

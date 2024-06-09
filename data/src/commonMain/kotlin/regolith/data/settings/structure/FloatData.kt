@@ -19,6 +19,7 @@ class FloatData<DATA>(
     override val category: SettingCategory? = null,
     override val description: String? = null,
     override val level: SettingLevel = SettingLevel.DEFAULT,
+    val entryFactory: (FloatData<DATA>, DATA) -> SettingEntry<DATA, FloatData<DATA>> = ::Entry,
 ): DataSetting<Double?, DATA> {
     override val dataTransformer: DataTransformer<Double?, DATA> = DoubleTransformations.DoubleToFloat.nullable()
         .then(floatDataTransformer)
@@ -36,5 +37,11 @@ class FloatData<DATA>(
         )
     }
 
+    override fun toEntry(value: DATA) = entryFactory(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry<DATA>(
+        override val setting: FloatData<DATA>,
+        override val value: DATA,
+    ): SettingEntry<DATA, FloatData<DATA>>
 }

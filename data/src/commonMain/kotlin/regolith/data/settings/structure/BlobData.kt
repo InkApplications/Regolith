@@ -20,6 +20,7 @@ class BlobData<DATA>(
     override val category: SettingCategory? = null,
     override val description: String? = null,
     override val level: SettingLevel = SettingLevel.DEFAULT,
+    val entryFactory: (BlobData<DATA>, DATA) -> SettingEntry<DATA, BlobData<DATA>> = ::Entry,
 ): DataSetting<ByteArray?, DATA> {
     override fun toPrimitive(): PrimitiveSetting<ByteArray?> {
         return BlobSetting(
@@ -34,5 +35,11 @@ class BlobData<DATA>(
         )
     }
 
+    override fun toEntry(value: DATA) = entryFactory(this, value)
     override fun toString(): String = "Setting($key)"
+
+    data class Entry<DATA>(
+        override val setting: BlobData<DATA>,
+        override val value: DATA,
+    ): SettingEntry<DATA, BlobData<DATA>>
 }
