@@ -2,17 +2,4 @@ name: PR Checks
 on: [pull_request]
 jobs:
   tests:
-    runs-on: ubuntu-latest
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v4.1.7
-      -
-        name: Configure Java
-        uses: actions/setup-java@v4.2.1
-        with:
-          java-version: 17
-          distribution: oracle
-      -
-        name: Tests
-        run: ./gradlew check
+    uses: inkapplications/.github/.github/workflows/kotlin-multiplatform-checks.yml@dac2d15cd5d68a5e99a1655f7a0cc1c6c5876752
