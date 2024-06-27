@@ -1,0 +1,7 @@
+name: Latest Build
+on:
+    push:
+        branches: [master]
+jobs:
+  tests:
+    uses: inkapplications/.github/.github/workflows/kmp-checks.yml@1.0.1
