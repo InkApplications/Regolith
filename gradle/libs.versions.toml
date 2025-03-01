@@ -2,7 +2,7 @@
 kotlin = "2.1.10"
 coroutines = "1.9.0"
 sqldelight = "2.0.2"
-watermelon = "1.8.1"
+watermelon = "1.9.0"
 
 [libraries.kotlin-gradle]
 version.ref = "kotlin"
